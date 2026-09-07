@@ -1,0 +1,24 @@
+cat << 'EOF' > .gitignore
+# SSH Keys & Local Secrets (CRITICAL)
+.ssh/
+*.pem
+*.key
+id_rsa*
+
+# Ansible artifacts
+*.retry
+*.log
+.ansible/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor directories
+.vscode/
+.idea/
+EOF
