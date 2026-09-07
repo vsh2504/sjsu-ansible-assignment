@@ -100,12 +100,8 @@ Replace `<VM1_IP>` and `<VM2_IP>` in `hosts.ini` with the addresses returned by
 
 ```ini
 [webservers]
-vm1 ansible_host=<VM1_IP> ansible_user=ubuntu sjsu_id=1
-vm2 ansible_host=<VM2_IP> ansible_user=ubuntu sjsu_id=2
-
-[webservers:vars]
-ansible_ssh_private_key_file=.ssh/id_rsa
-ansible_python_interpreter=/usr/bin/python3
+vm1 ansible_host=192.168.252.2 ansible_user=ubuntu sjsu_id=1 ansible_ssh_private_key_file=.ssh/id_rsa
+vm2 ansible_host=192.168.252.3 ansible_user=ubuntu sjsu_id=2 ansible_ssh_private_key_file=.ssh/id_rsa
 ```
 
 The project-level `ansible.cfg` supplies the inventory and avoids an interactive
