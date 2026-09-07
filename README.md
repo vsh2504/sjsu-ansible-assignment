@@ -148,7 +148,7 @@ directory.
 Run only the deployment play:
 
 ```bash
-ansible-playbook webserver.yml --tags deploy
+ansible-playbook hosts.ini webserver.yml --tags deploy
 ```
 
 The deployment performs the following work on both VMs:
@@ -188,7 +188,7 @@ the message assigned to that VM.
 Run the deployment command a second time:
 
 ```bash
-ansible-playbook webserver.yml --tags deploy
+ansible-playbook hosts.ini webserver.yml --tags deploy
 ```
 
 The second execution should complete successfully without unexpected changes.
@@ -199,7 +199,7 @@ Normally, the play recap reports `changed=0` for both hosts.
 Run only the teardown play:
 
 ```bash
-ansible-playbook webserver.yml --tags undeploy
+ansible-playbook hosts.ini webserver.yml --tags undeploy
 ```
 
 The undeploy play:
@@ -224,50 +224,7 @@ curl --connect-timeout 5 http://<VM2_IP>:8080
 Both requests should fail with a connection-refused or failed-to-connect
 message. This is the expected negative test after undeployment.
 
-## Required Submission Evidence
-
-The assignment report should include screenshots showing:
-
-1. `multipass list` with both VMs running and their IP addresses.
-2. Successful Ansible ping results for both hosts.
-3. The deployment `PLAY RECAP` with no failed or unreachable hosts.
-4. VM1 in a browser showing `Hello World from SJSU-1` on port `8080`.
-5. VM2 in a browser showing `Hello World from SJSU-2` on port `8080`.
-6. A second deployment run demonstrating idempotency.
-7. The undeploy `PLAY RECAP` with no failed or unreachable hosts.
-8. Failed HTTP connections after undeployment.
-9. The GitHub repository showing all source files and no `.ssh/` directory.
-
-## Source-Control Safety
-
-The `.gitignore` file should contain:
-
-```gitignore
-.ssh/
-*.retry
-.DS_Store
-```
-
-Before pushing, run `git status` and verify that `.ssh/` and `id_rsa` are not
-staged.
-
-## Push to GitHub
-
-```bash
-git init
-git add .gitignore ansible.cfg hosts.ini webserver.yml templates/default.conf.j2 README.md
-git status
-git commit -m "Add Ansible two-VM web server deployment"
-git branch -M main
-git remote add origin https://github.com/<username>/sjsu-ansible-assignment.git
-git push -u origin main
-```
-
-Replace `<username>` with the GitHub account used for the assignment.
-
-## Optional VM Cleanup
-
-After the assignment and demo are complete, delete the disposable VMs:
+## VM Cleanup
 
 ```bash
 multipass delete vm1 vm2
